@@ -1,25 +1,20 @@
+import java.util.ArrayList;
 class Solution {
     public void rotate(int[] nums, int k) {
-        if(nums.length == 1 || k == nums.length){
-            return; // no need to do anything
+        int n = nums.length;
+        k=k%n;
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        
+        for(int i=n-k;i<n;i++){
+            temp.add(nums[i]);
         }
-        else if(nums.length < k){
-            k = k % nums.length;
+
+       for (int i = n - k - 1; i >= 0; i--) {
+            nums[i + k] = nums[i];
         }
-        int j = nums.length - k;
-        int[] result = new int[nums.length];
-        for(int i=0; i<nums.length; i++){
-            if(j < nums.length){
-                result[i] = nums[j++];
-            }
-            else{
-                result[i] = nums[i-k];
-            }
-        }
-        int i = 0;
-        for(int r : result){
-            nums[i] = result[i];
-            i++;
+
+        for(int i=0;i<k;i++){
+            nums[i]=temp.get(i);
         }
     }
 }
