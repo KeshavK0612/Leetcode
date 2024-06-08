@@ -1,10 +1,16 @@
-import java.util.Arrays;
 class Solution {
     public int missingNumber(int[] nums) {
-        int ans = nums.length;
-        for(int i = 0;i<nums.length;i++){
-            ans += i - nums[i];
+        int xor = 0;
+        int n = nums.length;
+
+        // XOR all indices and values in the array
+        for (int i = 0; i < n; i++) {
+            xor ^= i ^ nums[i];
         }
-        return ans;
+
+        // XOR the last index n
+        xor ^= n;
+
+        return xor;
     }
 }
