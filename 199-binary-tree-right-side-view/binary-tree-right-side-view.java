@@ -23,8 +23,7 @@ class Solution {
     public void func(int level, List<Integer> arr, TreeNode root){
         if(root == null) return;
         if (level == arr.size()) arr.add(root.val);
-        else arr.set(level, root.val);
-        func(level+1,arr,root.left);
         func(level+1,arr,root.right);
+        func(level+1,arr,root.left);
     }
 }
