@@ -1,39 +1,51 @@
-import java.util.Stack;
-
 class MyQueue {
-    Stack<Integer> s1; // Stack for push operations
-    Stack<Integer> s2; // Stack for pop and peek operations
-    int front = 0; // Variable to track the front element
+    private Stack<Integer> first=new Stack<Integer>();
+    private Stack<Integer> second=new Stack<Integer>();
+    //private int  front;
 
     public MyQueue() {
-        this.s1 = new Stack<>();
-        this.s2 = new Stack<>();
+        
     }
-
+    
     public void push(int x) {
-        if (s1.empty()) {
-            front = x; // Update the front element if s1 is empty
-        }
-        s1.push(x); // Push element onto s1
+        first.push(x);
     }
-
+    
     public int pop() {
-        if (s2.isEmpty()) {
-            while (!s1.isEmpty()) {
-                s2.push(s1.pop()); // Transfer elements from s1 to s2 if s2 is empty
-            }
+        while(!first.isEmpty()){
+            second.push(first.pop());
         }
-        return s2.pop(); // Pop the top element from s2
+        int removed=second.pop();
+        while(!second.isEmpty()){
+            first.push(second.pop());
+        }
+        return removed;
     }
-
+    
     public int peek() {
-        return s2.isEmpty() ? front : s2.peek(); // Return the front element
+        while(!first.isEmpty()){
+            second.push(first.pop());
+        }
+        int removed=second.peek();
+        while(!second.isEmpty()){
+            first.push(second.pop());
+        }
+        return removed;
     }
-
+    
     public boolean empty() {
-        return s1.empty() && s2.empty(); // Check if both stacks are empty
+        return first.isEmpty();
     }
 }
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
 
 /**
  * Your MyQueue object will be instantiated and called as such:
