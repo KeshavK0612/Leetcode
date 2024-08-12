@@ -17,6 +17,6 @@ class Solution {
     }
 
     public int numSubarraysWithSum(int[] nums, int goal) {
-        return check(nums,goal)-check(nums,goal-1);  
+        return check(nums,goal)-check(nums,goal-1);
     }
 }
