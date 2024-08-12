@@ -1,25 +1,25 @@
 class Solution {
     public int numberOfSubstrings(String s) {
-        int aTot = 0, bTot = 0, cTot = 0;
-        int res = 0;
-        int i = 0, j = 0;
-    
-        while (j < s.length()) {
-            if (s.charAt(j) == 'a') aTot++;
-            else if (s.charAt(j) == 'b') bTot++;
-            else if (s.charAt(j) == 'c') cTot++;
-    
-            while (aTot > 0 && bTot > 0 && cTot > 0) {
+        int[] count = new int[3]; // To count occurrences of 'a', 'b', 'c'
+        int res = 0; // To store the result
+        int i = 0; // Left pointer of the window
+
+        // Iterate through the string with the right pointer
+        for (int j = 0; j < s.length(); j++) {
+            // Increment the count of the current character
+            count[s.charAt(j) - 'a']++;
+
+            // Shrink the window from the left while it remains valid
+            while (count[0] > 0 && count[1] > 0 && count[2] > 0) {
+                // All substrings starting from index i to j are valid
                 res += s.length() - j;
-    
-                if (s.charAt(i) == 'a') aTot--;
-                else if (s.charAt(i) == 'b') bTot--;
-                else if (s.charAt(i) == 'c') cTot--;
                 
-                i++; 
+                // Decrement the count of the character at the left pointer
+                count[s.charAt(i) - 'a']--;
+                
+                // Move the left pointer to the right
+                i++;
             }
-            
-            j++; 
         }
         return res;
     }
