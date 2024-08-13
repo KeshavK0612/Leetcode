@@ -1,25 +1,25 @@
 class Solution {
-    public List<List<Integer>> combinationSum2(int[] cand, int target) {
-        Arrays.sort(cand);
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        List<Integer> path = new ArrayList<Integer>();
-        dfs(cand, 0, target, path, res);
-        return res;
-    }
+    public void solve(int[] candidates, int target,int idx, List<Integer> temp, List<List<Integer>> res, int sum) {
+        if (idx > candidates.length || sum > target) {
+            return;
+        }
+        if(sum == target) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int j = idx; j < candidates.length; j++) {
+            if (j > idx && candidates[j] == candidates[j-1]) continue;
+            temp.add(candidates[j]);
+            solve(candidates, target, j+1, temp, res, sum+candidates[j]);
+            temp.remove(temp.size()-1);
+        }
 
-    void dfs(int[] cand, int cur, int target, List<Integer> path, List<List<Integer>> res) {
-        if (target == 0) {
-            res.add(new ArrayList(path));
-            return;
-        }
-        if (target < 0)
-            return;
-        for (int i = cur; i < cand.length; i++) {
-            if (i > cur && cand[i] == cand[i - 1])
-                continue;
-            path.add(path.size(), cand[i]);
-            dfs(cand, i + 1, target - cand[i], path, res);
-            path.remove(path.size() - 1);
-        }
+        return;
+    }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(candidates);
+        solve(candidates, target, 0, new ArrayList<>(), res, 0);
+        return res;
     }
 }
