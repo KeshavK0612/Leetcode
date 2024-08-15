@@ -16,7 +16,7 @@ class Solution {
                 if (five_dollars > 0 && ten_dollars > 0) {
                     five_dollars--;
                     ten_dollars--;
-                } else if (five_dollars > 2) {
+                } else if (five_dollars > 2&& ten_dollars == 0) {
                     five_dollars -= 3;
                 } else {
                     return false;
