@@ -22,6 +22,6 @@ class Solution {
             }
         }
         res.add(new int[]{start,end});
-        return res.toArray(new int[0][1]);
+        return res.toArray(new int[0][]);
     }
 }
