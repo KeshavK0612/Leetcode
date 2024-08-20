@@ -9,8 +9,7 @@ class Solution {
             arr[s.charAt(r) - 'A']++;
 
             max = Math.max(max, arr[s.charAt(r) - 'A']);
-
-            // Now we check if our current window is valid or not
+            
             if (r - l + 1 - max > k) { 
                 arr[s.charAt(l) - 'A']--;
                 l++;
