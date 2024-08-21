@@ -8,8 +8,8 @@ class Solution {
                 farthest = Math.max(farthest, i + nums[i]);
             }
             near = far + 1;
-            far = farthest;
             jumps++;
+            far = farthest;
         }
 
         return jumps;        
