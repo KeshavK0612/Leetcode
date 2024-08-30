@@ -1,7 +1,5 @@
 # Write your MySQL query statement below
-SELECT num FROM MyNumbers 
+SELECT Max(num) AS num FROM MyNumbers 
+WHERE num NOT IN (SELECT num FROM MyNumbers 
 GROUP BY num 
-HAVING count(num) = 1 
-UNION ALL SELECT NULL 
-ORDER BY num 
-DESC LIMIT 1;
+HAVING COUNT(num)>1);
