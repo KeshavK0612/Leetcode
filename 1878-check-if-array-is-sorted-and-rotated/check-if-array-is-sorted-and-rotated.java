@@ -1,21 +1,12 @@
 class Solution {
     public boolean check(int[] nums) {
-        int ans = 0, size = nums.length;
-
-        if (nums[0] < nums[size - 1]) {
-            ans++;
+        int drop = 0;
+        for(int i = 1; i< nums.length; i++){
+            if(nums[i-1] > nums[i]) drop++;
         }
 
-        for (int i = 1; i < size; i++) {
-            if (nums[i - 1] > nums[i]) {
-                ans++;
+        if(nums[0]< nums[nums.length - 1]) drop++;
 
-                if (ans > 1) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return drop <= 1;
     }
 }
