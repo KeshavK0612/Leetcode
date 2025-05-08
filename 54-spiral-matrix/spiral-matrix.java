@@ -1,45 +1,36 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-        LinkedList<Integer> obj=new LinkedList<>();
-        int a=matrix.length;
-        int b=matrix[0].length;
-        int max=Math.max(a,b);
-        int s=(max+1)/2;
-        int i,j,k;
-        max=a*b;
-        for(i=0;i<s;i++)
-        {
-            if(max==0)
-            break;
-            for(j=i;j<=b-i-1;j++)
-            {
-                obj.add(matrix[i][j]);
-                max--;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        List<Integer> res = new ArrayList<>();
+        int top = 0, bottom = m -1;
+        int left = 0, right = n -1;
+
+        while (top <= bottom && left <= right) {
+            for (int i = left; i <= right; i++) {
+                res.add(matrix[top][i]);
             }
-            if(max==0)
-            break;
-            for(k=i+1;k<=a-1-i;k++)
-            {
-                obj.add(matrix[k][b-i-1]);
-                max--;
+            top++;
+
+            for (int i = top; i <= bottom; i++) {
+                res.add(matrix[i][right]);
             }
-            if(max==0)
-            break;
-            for(j=b-i-2;j>=i;j--)
-            {
-                obj.add(matrix[a-i-1][j]);
-                max--;
+            right--;
+
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    res.add(matrix[bottom][i]);
+                }
+                bottom--;
             }
-            if(max==0)
-            break;
-            for(k=a-i-2;k>i;k--)
-            {
-                obj.add(matrix[k][i]);
-                max--;
+
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    res.add(matrix[i][left]);
+                }
+                left++;
             }
-            if(max==0)
-            break;
         }
-        return obj;
+        return res;
     }
 }
