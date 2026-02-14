@@ -1,8 +1,16 @@
 # Write your MySQL query statement below
-select employee_id, department_id from employee 
-where primary_flag = 'Y'
-  OR employee_id in (
-    select employee_id from employee
-    group by employee_id
-    having count(*) = 1
-  )
+SELECT employee_id, department_id
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER (
+               PARTITION BY employee_id
+               ORDER BY 
+                   CASE 
+                       WHEN primary_flag = 'Y' THEN 1 
+                       ELSE 2 
+                   END,
+                   department_id
+           ) AS rn
+    FROM employee
+) t
+WHERE rn = 1;
