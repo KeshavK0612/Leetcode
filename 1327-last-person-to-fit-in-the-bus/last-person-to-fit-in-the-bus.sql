@@ -1,6 +1,6 @@
 # Write your MySQL query statement below
 with total_table as (
-    select person_name, turn, sum(weight) over (order by turn) as total_weight
+    select person_name, sum(weight) over (order by turn) as total_weight
     from queue
 )
 
